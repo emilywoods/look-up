@@ -1,8 +1,19 @@
 {"1.2.0",
-[{<<"gleam_stdlib">>,{pkg,<<"gleam_stdlib">>,<<"0.8.0">>},0}]}.
+[{<<"gleam_http">>,
+  {git,"https://github.com/gleam-lang/gleam_http",
+       {ref,"69c5dd6ac223bc60a4e39ab298eb4546f3f85ae6"}},
+  1},
+ {<<"gleam_httpc">>,
+  {git,"https://github.com/gleam-experiments/httpc",
+       {ref,"70323a0a58e7b7051cb6d1d5c7f466e8be2193cb"}},
+  0},
+ {<<"gleam_stdlib">>,{pkg,<<"gleam_stdlib">>,<<"0.8.0">>},0},
+ {<<"jsone">>,{pkg,<<"jsone">>,<<"1.5.2">>},0}]}.
 [
 {pkg_hash,[
- {<<"gleam_stdlib">>, <<"A2DA46A7F2A971DBD973B04596182C71EC03D7A2991B75DCE995D7D154018FA5">>}]},
+ {<<"gleam_stdlib">>, <<"A2DA46A7F2A971DBD973B04596182C71EC03D7A2991B75DCE995D7D154018FA5">>},
+ {<<"jsone">>, <<"87ADEA283C9CF24767B4DEED44602989A5331156DF5D60A2660E9C9114D54046">>}]},
 {pkg_hash_ext,[
- {<<"gleam_stdlib">>, <<"70B235B93B685BC560FC9346F03CA33D5A7C186FFBF2996495613EB0D4BAC01C">>}]}
+ {<<"gleam_stdlib">>, <<"70B235B93B685BC560FC9346F03CA33D5A7C186FFBF2996495613EB0D4BAC01C">>},
+ {<<"jsone">>, <<"170C171CE7F6DD70C858065154A3305B8564833C6DCCA17E10B676CA31EA976F">>}]}
 ].
