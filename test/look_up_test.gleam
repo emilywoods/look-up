@@ -3,11 +3,10 @@ import decode.{decode_dynamic}
 import gleam/should
 import gleam/result
 import gleam/jsone
-
 import look_up.{IssPassTime, IssPassTimeRequest, IssPassTimeReponse}
 
-pub fn decode_json_test(){
-    let iss_pass_json =  "
+pub fn decode_json_test() {
+  let iss_pass_json = "
 {
   \"message\": \"success\", 
   \"request\": {
@@ -29,8 +28,14 @@ pub fn decode_json_test(){
   |> should.equal(
     Ok(
       IssPassTime(
-        request: IssPassTimeRequest(altitude: 100, datetime: 1590654251, latitude: 53.0, longitude:14.20, passes: 1),
-        response: [IssPassTimeReponse(duration: 20, risetime:1590677059)]
+        request: IssPassTimeRequest(
+          altitude: 100,
+          datetime: 1590654251,
+          latitude: 53.0,
+          longitude: 14.20,
+          passes: 1,
+        ),
+        response: [IssPassTimeReponse(duration: 20, risetime: 1590677059)],
       ),
     ),
   )
