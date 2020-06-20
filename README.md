@@ -1,6 +1,7 @@
-# look_up
+# Look up
 
-Looking for ISS
+Looking for the International Space Station: A small Gleam app to tell you when
+to look up if you want to see the ISS.
 
 
 ## Quick start
@@ -14,6 +15,19 @@ rebar3 eunit
 
 # Run the Erlang REPL
 rebar3 shell
+```
+
+## When should I look up?
+
+```sh
+
+# Run the Erlang REPL
+rebar3 shell
+
+# Execute the following (inputting your own coordinates)
+1> look_up:run(51.509865, -.118092).
+Look up at 2020-06-28 02:54 +00:00 if you want to see the space station!
+ok
 ```
 
 

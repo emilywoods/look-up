@@ -1,8 +1,10 @@
 import gleam/httpc.{Text, Response, None}
 import gleam/http.{Get}
-import gleam/dynamic.{Dynamic}
 import gleam/result
 import gleam/int
+import gleam/float
+import gleam/list
+import gleam/string
 import gleam/jsone
 import decode.{decode_dynamic}
 
@@ -11,63 +13,43 @@ pub external type StdOutput
 pub external fn print(String) -> StdOutput =
   "io" "fwrite"
 
-pub external fn debug_print(anything) -> StdOutput =
-  "erlang" "display"
+pub external fn timestamp_to_string(String, Int) -> String =
+  "qdate" "to_string"
 
 pub type IssPassTime {
-  IssPassTime(request: IssPassTimeRequest, response: List(IssPassTimeReponse))
-}
-
-pub type IssPassTimeRequest {
-  IssPassTimeRequest(
-    altitude: Int,
-    datetime: Int,
-    latitude: Float,
-    longitude: Float,
-    passes: Int,
-  )
+  IssPassTime(response: List(IssPassTimeReponse))
 }
 
 pub type IssPassTimeReponse {
   IssPassTimeReponse(duration: Int, risetime: Int)
 }
 
-pub fn api_call() -> StdOutput {
+pub fn make_request(lat: String, long: String) -> Result(String, String) {
+  let url = string.concat(
+    ["http://api.open-notify.org/iss-pass.json?lat=", lat, "&lon=", long],
+  )
   let result = httpc.request(
     method: Get,
-    url: "http://api.open-notify.org/iss-pass.json?lat=52.520008&lon=13.404954",
+    url: url,
     headers: [tuple("accept", "application/vnd.hmrc.1.0+json")],
     body: None,
   )
 
   case result {
-    Ok(response) -> print(response.body)
-    Error(e) -> {
-      debug_print(e)
-      print("Error making request:(\n")
-    }
+    Ok(response) -> Ok(response.body)
+    Error(e) -> Error("Error making request\n")
   }
 }
 
 pub fn decode_json(iss_pass_json: String) -> Result(IssPassTime, String) {
-  let iss_pass_time_request_decoder = decode.map5(
-    IssPassTimeRequest,
-    decode.field("altitude", decode.int()),
-    decode.field("datetime", decode.int()),
-    decode.field("latitude", decode.float()),
-    decode.field("longitude", decode.float()),
-    decode.field("passes", decode.int()),
-  )
-
   let iss_pass_time_response_decoder = decode.map2(
     IssPassTimeReponse,
     decode.field("duration", decode.int()),
     decode.field("risetime", decode.int()),
   )
 
-  let result_decoder = decode.map2(
+  let result_decoder = decode.map(
     IssPassTime,
-    decode.field("request", iss_pass_time_request_decoder),
     decode.field("response", decode.list(iss_pass_time_response_decoder)),
   )
 
@@ -77,6 +59,38 @@ pub fn decode_json(iss_pass_json: String) -> Result(IssPassTime, String) {
 
   case dynamic_object_result {
     Ok(_) -> dynamic_object_result
-    _ -> Error("Couldn't decode JSON into IssPassTimes.")
+    _ -> Error("Unable to decode JSON")
+  }
+}
+
+pub fn get_risetime(iss_pass: IssPassTime) -> Result(Int, String) {
+  let response = iss_pass.response
+    |> list.head
+
+  case response {
+    Ok(response) -> Ok(response.risetime)
+    Error(e) -> Error("Error getting the risetime from the response")
+  }
+}
+
+pub fn convert_unix_timestamp(timestamp: Int) -> Result(String, String) {
+  let ts = timestamp_to_string("Y-m-d H:i P", timestamp)
+  Ok(ts)
+}
+
+pub fn run(lat: Float, long: Float) -> StdOutput {
+  let decoded = make_request(float.to_string(lat), float.to_string(long))
+    |> result.then(decode_json(_))
+    |> result.then(get_risetime(_))
+    |> result.then(convert_unix_timestamp(_))
+
+  case decoded {
+    Ok(ts) -> {
+      let message = string.concat(
+        ["Look up at ", ts, " if you want to see the space station!\n"],
+      )
+      print(message)
+    }
+    _ -> print("uh oh - unable to determine when to look up :(\n")
   }
 }

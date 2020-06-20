@@ -1,5 +1,7 @@
 {"1.2.0",
-[{<<"gleam_decode">>,{pkg,<<"gleam_decode">>,<<"1.4.0">>},1},
+[{<<"cf">>,{pkg,<<"cf">>,<<"0.3.1">>},2},
+ {<<"erlware_commons">>,{pkg,<<"erlware_commons">>,<<"1.3.1">>},1},
+ {<<"gleam_decode">>,{pkg,<<"gleam_decode">>,<<"1.4.0">>},1},
  {<<"gleam_http">>,
   {git,"https://github.com/gleam-lang/gleam_http",
        {ref,"69c5dd6ac223bc60a4e39ab298eb4546f3f85ae6"}},
@@ -10,16 +12,27 @@
   0},
  {<<"gleam_jsone">>,{pkg,<<"gleam_jsone">>,<<"0.2.0">>},0},
  {<<"gleam_stdlib">>,{pkg,<<"gleam_stdlib">>,<<"0.8.0">>},0},
- {<<"jsone">>,{pkg,<<"jsone">>,<<"1.5.2">>},0}]}.
+ {<<"jsone">>,{pkg,<<"jsone">>,<<"1.5.2">>},0},
+ {<<"qdate">>,
+  {git,"https://github.com/choptastic/qdate.git",
+       {ref,"b8a50750267af6480333a1e4ee27e9db91b2c422"}},
+  0},
+ {<<"qdate_localtime">>,{pkg,<<"qdate_localtime">>,<<"1.1.0">>},1}]}.
 [
 {pkg_hash,[
+ {<<"cf">>, <<"5CB902239476E141EA70A740340233782D363A31EEA8AD37049561542E6CD641">>},
+ {<<"erlware_commons">>, <<"0CE192AD69BC6FD0880246D852D0ECE17631E234878011D1586E053641ED4C04">>},
  {<<"gleam_decode">>, <<"A8090BB8CD8C51FE5EA0A90C3A265231760B3E67AEE86270FDB6A7EEC3E5E071">>},
  {<<"gleam_jsone">>, <<"9AEEE9B5E67BCBE2835DBFFDA620015E5E4562C5533B3F870B975CA9BB3D1E3B">>},
  {<<"gleam_stdlib">>, <<"A2DA46A7F2A971DBD973B04596182C71EC03D7A2991B75DCE995D7D154018FA5">>},
- {<<"jsone">>, <<"87ADEA283C9CF24767B4DEED44602989A5331156DF5D60A2660E9C9114D54046">>}]},
+ {<<"jsone">>, <<"87ADEA283C9CF24767B4DEED44602989A5331156DF5D60A2660E9C9114D54046">>},
+ {<<"qdate_localtime">>, <<"5F6C3ACF10ECC5A7E2EFA3DCD2C863102B962188DBD9E086EC01D29FE029DA29">>}]},
 {pkg_hash_ext,[
+ {<<"cf">>, <<"315E8D447D3A4B02BCDBFA397AD03BBB988A6E0AA6F44D3ADD0F4E3C3BF97672">>},
+ {<<"erlware_commons">>, <<"7AADA93F368D0A0430122E39931B7FB4AC9E94DBF043CDC980AD4330FD9CD166">>},
  {<<"gleam_decode">>, <<"C11DFD45D33047AE681351780FC4ED06C97B83BB15359A0BA66840D6655F5828">>},
  {<<"gleam_jsone">>, <<"7B1551474E5B6AF8B48C790BDBDBE0F5098A2286CA881292D4A1F45E9D1FF7A3">>},
  {<<"gleam_stdlib">>, <<"70B235B93B685BC560FC9346F03CA33D5A7C186FFBF2996495613EB0D4BAC01C">>},
- {<<"jsone">>, <<"170C171CE7F6DD70C858065154A3305B8564833C6DCCA17E10B676CA31EA976F">>}]}
+ {<<"jsone">>, <<"170C171CE7F6DD70C858065154A3305B8564833C6DCCA17E10B676CA31EA976F">>},
+ {<<"qdate_localtime">>, <<"91928E066DA6BCC745FF18B7C368347457CAF9250AD00950E9DA18E129D49EC5">>}]}
 ].
